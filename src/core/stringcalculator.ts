@@ -1,22 +1,27 @@
-export function stringCalculator(values:string): number {
-    var separator = ","
-    if(values.startsWith('//')) {
-        // has configurable separator
-        separator = values.charAt(2)
-        values = values.slice(4)
-
+const sum = (accumulator: number, currentValue: any) => {
+    if (Number(currentValue)) {
+        accumulator += Number(currentValue)
     }
-    let numbers = values.split(separator)
-    const sumReducer = (accumulator: number, currentValue: any) => {
-        if (Number(currentValue)) {
-            return accumulator + Number(currentValue)
-        }
-        return accumulator
-    }
-    const sum = numbers.reduce(sumReducer, 0);
+    return accumulator
+}
 
-    return sum;
+export function sumNumbers(expression:string): number {
+    var separator:string
+    ({ separator, expression } = extractSeparator(expression))
+    let numbers = expression.split(separator)
+    const total = numbers.reduce(sum, 0);
+    return total;
 }
 
 
+
+function extractSeparator(expression: string) {
+    var separator = ","
+    if (expression.startsWith('//')) {
+        // has custom separator
+        separator = expression.charAt(2)
+        expression = expression.slice(4)
+    }
+    return { separator, expression }
+}
 
