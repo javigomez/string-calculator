@@ -1,10 +1,3 @@
-const sum = (accumulator: number, currentValue: any) => {
-    if (Number(currentValue)) {
-        accumulator += Number(currentValue)
-    }
-    return accumulator
-}
-
 export function sumNumbers(expression:string): number {
     var separator:string
     ({ separator, expression } = extractSeparator(expression))
@@ -13,7 +6,12 @@ export function sumNumbers(expression:string): number {
     return total;
 }
 
-
+const sum = (accumulator: number, currentValue: any) => {
+    if (Number(currentValue)) {
+        accumulator += Number(currentValue)
+    }
+    return accumulator
+}
 
 function extractSeparator(expression: string) {
     var separator = ","
